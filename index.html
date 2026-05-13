@@ -30,17 +30,14 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── PAGES ── */
 .page { display: none; min-height: 100vh; flex-direction: column; }
 .page.active { display: flex; }
 
-/* ── STRIPE ── */
 .stripe {
   height: 5px; flex-shrink: 0;
   background: linear-gradient(90deg, var(--red) 50%, var(--gold) 50%);
 }
 
-/* ── NAV ── */
 nav {
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
@@ -60,7 +57,6 @@ nav {
   letter-spacing: 0.06em; text-transform: uppercase;
 }
 
-/* ── SCROLL BODY ── */
 .page-body {
   flex: 1;
   overflow-y: auto;
@@ -68,7 +64,6 @@ nav {
   padding: 1.75rem 1.1rem 2.5rem;
 }
 
-/* ── HERO BLOCK ── */
 .hero-block {
   text-align: center;
   padding: 0.5rem 0 1.75rem;
@@ -95,7 +90,6 @@ nav {
   line-height: 1.6; font-weight: 300;
 }
 
-/* ── CARD ── */
 .card {
   background: var(--white);
   border-radius: 18px;
@@ -119,7 +113,6 @@ nav {
   font-weight: 300; margin-bottom: 1.3rem; line-height: 1.5;
 }
 
-/* YES / NO */
 .yesno { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
 .yn-btn {
   display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
@@ -128,24 +121,49 @@ nav {
   background: var(--cream); cursor: pointer;
   font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 500;
   color: var(--ink-soft); transition: all 0.15s;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
+  -webkit-tap-highlight-color: transparent; user-select: none;
 }
 .yn-btn .icon { font-size: 1.6rem; }
 .yn-btn:active { transform: scale(0.96); }
 .yn-btn.sel-yes { border-color: var(--red); background: var(--red); color: var(--white); }
 .yn-btn.sel-no  { border-color: var(--ink); background: var(--ink); color: var(--white); }
 
-/* OPTIONS */
-.options-wrap { display: none; margin-top: 0; }
-.options-wrap.visible {
-  display: block;
+.sep { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+/* NAME FIELD */
+.name-wrap {
+  display: none;
   animation: fadeUp 0.3s ease both;
 }
-.sep {
-  border: none; border-top: 1px solid var(--border);
-  margin: 1.25rem 0;
+.name-wrap.visible { display: block; }
+
+.field-label {
+  font-size: 0.75rem; font-weight: 500;
+  color: var(--ink); margin-bottom: 0.45rem; display: block;
 }
+.field-label span { color: var(--red); margin-left: 2px; }
+.name-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem; color: var(--ink);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+}
+.name-input:focus {
+  border-color: var(--red);
+  background: var(--white);
+}
+.name-input::placeholder { color: #BBBBBB; }
+
+/* OPTIONS */
+.options-wrap { display: none; animation: fadeUp 0.3s ease both; }
+.options-wrap.visible { display: block; }
+
 .options-grid {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 0.6rem; margin-bottom: 1.25rem;
@@ -191,7 +209,6 @@ nav {
 }
 .submit-btn:active { background: var(--red-light); transform: scale(0.99); }
 
-/* ── FOOTER ── */
 footer {
   flex-shrink: 0;
   background: var(--ink);
@@ -200,7 +217,7 @@ footer {
 }
 footer strong { color: rgba(255,255,255,0.75); }
 
-/* ── THANKS PAGE ── */
+/* THANKS */
 #pageThanks .page-body {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
@@ -214,7 +231,6 @@ footer strong { color: rgba(255,255,255,0.75); }
 }
 .thanks-badge.yes { background: var(--gold-pale); border: 2px solid var(--gold); }
 .thanks-badge.no  { background: #F2F2F2; border: 2px solid #DCDCDC; }
-
 .thanks-wrap h2 {
   font-family: 'Playfair Display', serif;
   font-size: 1.65rem; font-weight: 700;
@@ -275,7 +291,8 @@ footer strong { color: rgba(255,255,255,0.75); }
     </div>
 
     <div class="card">
-      <!-- Step 1 -->
+
+      <!-- STEP 1: Sí / No -->
       <div id="step1">
         <div class="q-label">Pregunta</div>
         <div class="q-title">¿Te interesa algún seguro o asistencia?</div>
@@ -292,8 +309,25 @@ footer strong { color: rgba(255,255,255,0.75); }
         </div>
       </div>
 
-      <!-- Step 2 -->
-      <div id="step2" class="options-wrap">
+      <!-- STEP 2: Nombre -->
+      <div id="step2" class="name-wrap">
+        <hr class="sep">
+        <div class="q-label">Tu información</div>
+        <div class="q-title">¿Cuál es tu nombre?</div>
+        <p class="q-sub">Para poder contactarte cuando estemos listos.</p>
+        <label class="field-label" for="nombreInput">Nombre completo <span>*</span></label>
+        <input
+          class="name-input"
+          type="text"
+          id="nombreInput"
+          placeholder="Ej. María García"
+          autocomplete="name"
+          autocorrect="off"
+        >
+      </div>
+
+      <!-- STEP 3: Opciones -->
+      <div id="step3" class="options-wrap">
         <hr class="sep">
         <div class="q-label">¿En qué estás interesado?</div>
         <div class="q-title">Selecciona lo que aplique</div>
@@ -343,6 +377,7 @@ footer strong { color: rgba(255,255,255,0.75); }
         </div>
         <button class="submit-btn" onclick="submitForm()">Enviar respuesta →</button>
       </div>
+
     </div>
   </div>
 
@@ -376,7 +411,7 @@ footer strong { color: rgba(255,255,255,0.75); }
 
 
 <script>
-const KEY = 'encuesta_lj_v3';
+const KEY = 'encuesta_lj_v4';
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)||'[]'); } catch { return []; } };
 const save = d => localStorage.setItem(KEY, JSON.stringify(d));
 
@@ -386,36 +421,62 @@ function selectInterest(yes) {
   interest = yes;
   document.getElementById('btnSi').className = 'yn-btn' + (yes ? ' sel-yes' : '');
   document.getElementById('btnNo').className = 'yn-btn' + (!yes ? ' sel-no' : '');
+
   if (yes) {
     const s2 = document.getElementById('step2');
     s2.classList.add('visible');
-    setTimeout(() => s2.scrollIntoView({ behavior:'smooth', block:'nearest' }), 60);
+    setTimeout(() => {
+      s2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      setTimeout(() => document.getElementById('nombreInput').focus(), 400);
+    }, 60);
+
+    // Show options after name field appears
+    setTimeout(() => {
+      document.getElementById('step3').classList.add('visible');
+    }, 100);
   } else {
-    save_and_go(false, []);
+    save_and_go(false, '', []);
   }
 }
 
 function submitForm() {
+  const nombre = document.getElementById('nombreInput').value.trim();
+  if (!nombre) {
+    document.getElementById('nombreInput').focus();
+    document.getElementById('nombreInput').style.borderColor = 'var(--red)';
+    document.getElementById('nombreInput').placeholder = 'Por favor ingresa tu nombre';
+    return;
+  }
   const tipos = [...document.querySelectorAll('input[name="tipo"]:checked')].map(c => c.value);
-  if (!tipos.length) { alert('Por favor selecciona al menos una opción.'); return; }
-  save_and_go(true, tipos);
+  if (!tipos.length) {
+    alert('Por favor selecciona al menos una opción.');
+    return;
+  }
+  save_and_go(true, nombre, tipos);
 }
 
-function save_and_go(interested, tipos) {
+function save_and_go(interested, nombre, tipos) {
   const data = load();
-  data.push({ fecha: new Date().toLocaleString('es-GT'), interesado: interested ? 'Sí' : 'No', tipos });
+  data.push({
+    fecha: new Date().toLocaleString('es-GT'),
+    interesado: interested ? 'Sí' : 'No',
+    nombre,
+    tipos
+  });
   save(data);
-  showThanks(interested, tipos);
+  showThanks(interested, nombre, tipos);
 }
 
-function showThanks(interested, tipos) {
+function showThanks(interested, nombre, tipos) {
   const w = document.getElementById('thanksWrap');
   if (interested) {
+    const firstName = nombre.split(' ')[0];
+    const tagsHTML = tipos.map(t => '<span class="stag">' + t + '</span>').join('');
     w.innerHTML = `
       <div class="thanks-badge yes">🎉</div>
-      <h2>¡Muchas <em>gracias</em>!</h2>
+      <h2>¡Gracias, <em>${firstName}</em>!</h2>
       <p>Tu interés ha sido registrado. Un miembro del equipo de bienestar se comunicará contigo próximamente.</p>
-      <div class="tags-row">${tipos.map(t=>'<span class="stag">'+t+'</span>').join('')}</div>
+      <div class="tags-row">${tagsHTML}</div>
       <hr class="sep2">
       <button class="restart-btn" onclick="restart()">Registrar otra respuesta</button>
     `;
@@ -430,7 +491,7 @@ function showThanks(interested, tipos) {
   }
   document.getElementById('pageSurvey').classList.remove('active');
   document.getElementById('pageThanks').classList.add('active');
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 
 function restart() {
@@ -438,10 +499,14 @@ function restart() {
   document.getElementById('btnSi').className = 'yn-btn';
   document.getElementById('btnNo').className = 'yn-btn';
   document.getElementById('step2').classList.remove('visible');
+  document.getElementById('step3').classList.remove('visible');
+  document.getElementById('nombreInput').value = '';
+  document.getElementById('nombreInput').style.borderColor = '';
+  document.getElementById('nombreInput').placeholder = 'Ej. María García';
   document.querySelectorAll('input[name="tipo"]').forEach(c => c.checked = false);
   document.getElementById('pageThanks').classList.remove('active');
   document.getElementById('pageSurvey').classList.add('active');
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 </script>
 </body>
