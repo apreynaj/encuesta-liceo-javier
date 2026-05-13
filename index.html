@@ -496,14 +496,16 @@ async function sendToSheets(entry) {
 }
 
 function save_and_go(interested, nombre, tipos) {
-  const data = load();
-  data.push({
+  const entry = {
     fecha: new Date().toLocaleString('es-GT'),
     interesado: interested ? 'Sí' : 'No',
-    nombre,
-    tipos
-  });
+    nombre: nombre,
+    tipos: tipos
+  };
+  const data = load();
+  data.push(entry);
   save(data);
+  sendToSheets(entry);
   showThanks(interested, nombre, tipos);
 }
 
