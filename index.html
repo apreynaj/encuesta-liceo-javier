@@ -56,6 +56,21 @@ nav {
   font-size: 0.62rem; font-weight: 400; color: var(--ink-soft);
   letter-spacing: 0.06em; text-transform: uppercase;
 }
+.nav-divider {
+  width: 1px; height: 34px;
+  background: var(--border); flex-shrink: 0;
+}
+.nav-promo {
+  display: flex; flex-direction: column; justify-content: center; line-height: 1.2;
+}
+.nav-promo .promo-label {
+  font-size: 0.58rem; font-weight: 400; color: var(--ink-soft);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.nav-promo .promo-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.92rem; font-weight: 700; color: var(--red);
+}
 
 .page-body {
   flex: 1;
@@ -280,6 +295,11 @@ footer strong { color: rgba(255,255,255,0.75); }
         <span class="name">Liceo Javier</span>
         <span class="sub">Programa de Bienestar</span>
       </div>
+      <div class="nav-divider"></div>
+      <div class="nav-promo">
+        <span class="promo-label">Promoción</span>
+        <span class="promo-value">XXII</span>
+      </div>
     </div>
   </nav>
 
@@ -396,6 +416,11 @@ footer strong { color: rgba(255,255,255,0.75); }
       <div class="nav-text">
         <span class="name">Liceo Javier</span>
         <span class="sub">Programa de Bienestar</span>
+      </div>
+      <div class="nav-divider"></div>
+      <div class="nav-promo">
+        <span class="promo-label">Promoción</span>
+        <span class="promo-value">XXII</span>
       </div>
     </div>
   </nav>
