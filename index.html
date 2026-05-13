@@ -480,6 +480,21 @@ function submitForm() {
   save_and_go(true, nombre, tipos);
 }
 
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwseGZ8B1WLu6FvHkG2JxSrPDrLHi8qJaaHFtGXtdvWSFjiuFZlSDUiH-t_yM_TP_QF/exec';
+
+async function sendToSheets(entry) {
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    });
+  } catch(e) {
+    console.error('Error enviando a Sheets:', e);
+  }
+}
+
 function save_and_go(interested, nombre, tipos) {
   const data = load();
   data.push({
